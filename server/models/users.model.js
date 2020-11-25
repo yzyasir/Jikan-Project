@@ -3,15 +3,6 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const bcrypt = require('bcrypt');
 
-UserSchema.pre('save', function(next) {
-// We do not want our passwords saved in actual text, Bcrypt is a popular library for hashing passwords.
-// Installed using "npm i bcypt"
-    bcrypt.hash(this.password, 10)
-      .then(hash => {
-        this.password = hash;
-        next();
-      });
-  });
 // It is recommended to use bcypt "asynchronously", so we use with a promise
 // 10 is the number of "salt rounds" Bcyrpt will use when generating a salt (look it up).
 // Next is the function we will use once the promise if fulfilled
@@ -65,5 +56,14 @@ next();
 });
 
 const User = mongoose.model("User", UserSchema); 
+UserSchema.pre('save', function(next) {
+    // We do not want our passwords saved in actual text, Bcrypt is a popular library for hashing passwords.
+    // Installed using "npm i bcypt"
+        bcrypt.hash(this.password, 10)
+          .then(hash => {
+            this.password = hash;
+            next();
+          });
+      });
 
 module.exports = User; 

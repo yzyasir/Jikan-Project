@@ -5,6 +5,7 @@ const User = require("../models/Users.model"); //we exported our models file tha
 
 module.exports.createUser = (req, res) => { //dont need to export the whole file since we are exporting the individual commands
     User.create(req.body)
+// information is passed through the body through the way we did it, but you CAN pass it through the url if you so choose
         .then(newUser => res.json({message: "Success, you made an account", user: newUser}))
         .catch(err => res.json({message: "Hey, something went wrong", error: err}))
 // On createUser we created a new user with the data passed from the request via "request.body"
