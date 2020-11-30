@@ -1,6 +1,5 @@
 // 2)
 const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
 const bcrypt = require('bcrypt');
 
 // It is recommended to use bcypt "asynchronously", so we use with a promise
@@ -39,6 +38,7 @@ const UserSchema = new mongoose.Schema({
 // My UserSchema doesnt contain a field for confirmPassword (since we didnt want to save it to our db),
 // we use this to add in a touch of code to compare password entries
 // We can make use of "mongoose virtuals" for things we dont want to save in mongoDB
+// Make sure to add this after user schema is defined
 UserSchema.virtual('confirmPassword')
   .get( () => this._confirmPassword )
   .set( value => this._confirmPassword = value )
@@ -54,8 +54,7 @@ if (this.password !== this.confirmPassword) {
 // When our middleware has done its job, we need to call this to have the next middleware or function (in this case validations) run
 next();
 });
-
-const User = mongoose.model("User", UserSchema); 
+ 
 UserSchema.pre('save', function(next) {
     // We do not want our passwords saved in actual text, Bcrypt is a popular library for hashing passwords.
     // Installed using "npm i bcypt"
@@ -66,4 +65,5 @@ UserSchema.pre('save', function(next) {
           });
       });
 
+const User = mongoose.model("User", UserSchema);
 module.exports = User; 
