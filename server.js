@@ -15,6 +15,9 @@ app.use(express.json(), express.urlencoded({extended: true}));
 const AllUserRoutes = require("./server/routes/User.routes");
 AllUserRoutes(app);
 // ______________________________________________________________
+const AllReviewRoutes = require("./server/routes/Review.routes")
+AllReviewRoutes(app);
+// ______________________________________________________________
 app.listen(port, ()=>console.log(`Developer is listening in on port : ${port}`));
 // ______________________________________________________________
 // Json Web tokens (JSTs) are a structured way to keep data secure and to make sure that data has not been tampered with in the res req cycle

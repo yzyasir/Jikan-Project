@@ -2,7 +2,7 @@ const Review = require("../models/Reviews.model");
 
 module.exports.createReview = (req, res) => {
     Review.create(req.body)
-        .then(newReview => res.json({message: "Success, you made an account", review: newReview}))
+        .then(newReview => res.json({message: "Success, you submitted a review", review: newReview}))
         .catch(err => res.json({message: "Hey, something went worng", error: err}))
 }
 
