@@ -1,15 +1,15 @@
 import './App.css';
-import {Router, Link} from '@reach/router'
+import {Router} from '@reach/router'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
-import HomePage from "./views/HomePage";
+import Registration from "./views/Registration";
 
 
 function App() {
   return (
     <div className="App">
       <Router>
-        
+        <Registration path="/" />
       </Router>
     </div>
   );

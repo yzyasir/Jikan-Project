@@ -43,10 +43,6 @@ const Form = (props) => {
                         : ""
                         }
                     </div>
-                    <div className="form-group">
-                        <label>Confirm Password</label>
-                        <input type="text" name="" className="form-control" onChange={props.onChangeHandler} value={}></input>
-                    </div>
                     <input type="submit" value="Submit" className="btn btn-primary"></input>
                 </form>
             </div>
