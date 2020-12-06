@@ -26,7 +26,7 @@ const Form = (props) => {
                         }
                     </div>
                     <div className="form-group">
-                        <label>email</label>
+                        <label>Email</label>
                         <input type="text" name="email" className="form-control" onChange={props.onChangeHandler} value={props.form.email}></input>
                         { //we are passing our errors through props
                             props.error.email ?
@@ -42,6 +42,10 @@ const Form = (props) => {
                         <span>{props.error.password.message}</span>
                         : ""
                         }
+                    </div>
+                    <div className="form-group">
+                        <label>Confirm Password</label>
+                        <input type="text" name="confirmPassword" className="form-control" onChange={props.onChangeHandler} value={props.form.confirmPassword}></input>
                     </div>
                     <input type="submit" value="Submit" className="btn btn-primary"></input>
                 </form>

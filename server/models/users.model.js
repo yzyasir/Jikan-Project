@@ -1,5 +1,6 @@
 // 2)
 const mongoose = require("mongoose");
+// needed to define what mongoose is 
 const bcrypt = require('bcrypt');
 
 // It is recommended to use bcypt "asynchronously", so we use with a promise
@@ -59,11 +60,13 @@ UserSchema.pre('save', function(next) {
     // We do not want our passwords saved in actual text, Bcrypt is a popular library for hashing passwords.
     // Installed using "npm i bcypt"
         bcrypt.hash(this.password, 10)
+        // 10 is for the salt, hashes it 10 times to maximize the randomness
           .then(hash => {
             this.password = hash;
             next();
           });
       });
+// The only other time where I would use bcrypt is when Im logging in to verify passwords
 
 const User = mongoose.model("User", UserSchema);
 module.exports = User; 

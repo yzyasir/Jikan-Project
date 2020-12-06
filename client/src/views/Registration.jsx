@@ -12,6 +12,7 @@ const Registration = (props) => {
         lastName: "",
         email: "",
         password: "",
+        confirmPassword: "", //still needed to include the state "placeholder" for confirm password even though it is not going into our db
     })
 
     const [error, setError] = useState({});
@@ -20,7 +21,7 @@ const Registration = (props) => {
         eventProp.preventDefault(); //preventDefault is called on the event when submitting the form to prevent a browser reload/refresh. Try the code without it to see what happens.
         setForm({
             ...form,
-            [eventProp.target.firstName]: eventProp.target.value 
+            [eventProp.target.name]: eventProp.target.value //WHY IS IT .NAME???
             //this needs to be eventProp.target.name so that the component in the form updates
             //.target.value retrieves the value of whatever input it was called on, so whatever I insert in input can be accessed through event.target.value
         })
@@ -30,11 +31,11 @@ const Registration = (props) => {
         event.preventDefault();
         //this needs to be eventProp.target.name so that the component in the form updates
         //.target.value retrieves the value of whatever input it was called on, so whatever I insert in input can be accessed through event.target.value
-        axios.post("http://localhost:8000/api/new/user", form)
+        axios.post("http://localhost:8000/api/new/user", form) //WHY IS form WRITTEN HERE?
         .then(res => {
             if(res.data.error){ //this is basically asking res.data if it has any errors in it
                 console.log(res.data.error.errors)
-                // setError()
+                setError(res.data.error.errors)
             } else {
                 console.log("Hey, our on submit worked!") //otherwise if all is good, let this happen then
                 navigate("/") //navigates back to our front page 
