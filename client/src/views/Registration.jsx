@@ -30,6 +30,7 @@ const Registration = (props) => {
     }
 
     const onSubmitHandler = (event) => {
+        console.log("The form is", form);
         event.preventDefault();
         //this needs to be eventProp.target.name so that the component in the form updates
         //.target.value retrieves the value of whatever input it was called on, so whatever I insert in input can be accessed through event.target.value

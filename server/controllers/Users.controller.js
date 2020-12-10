@@ -3,16 +3,19 @@
 
 const User = require("../models/Users.model"); //we exported our models file thats why we are able to plug it in here
 // ________________________________________________________________________________________
-    bcrypt = require('bcrypt') //need bcrypt here as well
-    jwt = require('jsonwebtoken');
+bcrypt = require('bcrypt') //need bcrypt here as well
+jwt = require('jsonwebtoken');
     // this is also one of the files where we use json web tokens
 // ________________________________________________________________________________________
 
 module.exports = {
     register: (req, res) => { //dont need to export the whole file since we are exporting the individual commands
+        // console.log("Boiiiiiiiii the req is ", req.body); //This console.log goes to the server.js
         User.create(req.body) //request and response OBJECT not cycle
+        console.log("Hey there sexy, this is the ", req.body)
 // information is passed through the body through the way we did it, but you CAN pass it through the url if you so choose
         .then(newUser => {
+            console.log("This is the newuser XXXXX" ,newUser);
 // Instead of just responding with a json object, I am going to say res.cookie, this is where we set up the cookie (has a key value pair), with the name usertoken and it value is a jwt
             res
                 .cookie(
@@ -24,7 +27,7 @@ module.exports = {
                             }
                         )
                         .json({message: "Success, you made an account", user: newUser})}) //I can customize the object, but I would rather not, ask Adrien, remember you can have objects within objects
-        .catch(err => res.json({message: "Hey, something went wrong", error: err}))
+        .catch(err => res.json({message: "Hey, something went wrong with the registration", error: err}))
     },
     login: (req, res) => {
         User.findOne({email: req.body.email})

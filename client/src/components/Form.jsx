@@ -1,6 +1,9 @@
 import React from 'react';
 
 const Form = (props) => {
+
+    console.log("Props is ", props);
+
     return(
         <div className="row">
             <div className="col-sm-2"></div>
@@ -46,6 +49,11 @@ const Form = (props) => {
                     <div className="form-group">
                         <label>Confirm Password</label>
                         <input type="text" name="confirmPassword" className="form-control" onChange={props.onChangeHandler} value={props.form.confirmPassword}></input>
+                        { //we are passing our errors through props
+                            props.error.confirmPassword ?
+                        <span>{props.error.confirmPassword.message}</span>
+                        : ""
+                        }
                     </div>
                     <input type="submit" value="Submit" className="btn btn-primary"></input>
                 </form>

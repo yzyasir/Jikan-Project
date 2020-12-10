@@ -36,7 +36,7 @@ const Login = (props) => {
     }
 
     return (
-        <div>
+        <>
             <h2>Login to use Jikan</h2>
             <div className="row">
                 <div className="col-sm-2"></div>
@@ -56,7 +56,7 @@ const Login = (props) => {
                     </form>
                 </div>
             </div>
-        </div>
+        </>
     )
 }
 export default Login;
