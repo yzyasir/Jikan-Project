@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import axios from 'axios';
 import Form from '../components/Form';
 import { navigate } from '@reach/router';
-// import {navigate} from '@reach/router';
+import Navbar from '../components/Navbar';
 
 const Registration = (props) => {
     // The logic for each form that I will be passing in will be different for the registration and edit pages
@@ -45,6 +45,7 @@ const Registration = (props) => {
 
     return(
         <div>
+            <h2>Register to use Jikan</h2>
             {/* Need to pass onChangeHandler into form to use it */}
             <Form onSubmitHandler={onSubmitHandler} form={form} onChangeHandler={onChangeHandler} error={error} />
         </div>

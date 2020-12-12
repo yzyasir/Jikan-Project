@@ -16,10 +16,11 @@ module.exports.register = (req, res) => { //dont need to export the whole file s
 module.exports.login = (req, res) => {
     console.log("Heres the req body", req.body.email)
     User.findOne({email: req.body.email})
+    console.log("Heres the req body", req.body.email)
         .then(user => {
             if(user == null){ // == means equal to, what we are doing here is checking if there is any email in the db that matches what comes through req.body
                 res.status(400).json({message: "There is no email matching the one you entered, please try again"})
-                res.cookie()
+                // res.cookie()
             } else{ //no need to add comparison since the if failed
                 bcrypt.compare(req.body.password, user.password)
                     .then(isValid => {
@@ -41,6 +42,7 @@ module.exports.login = (req, res) => {
         }); 
 }
 
+
 // The form page will call to our API in order to actually register the user in the db
 // Hashing will occur at the "schema level" (meaning in our user models) so we will not have to worry about that here since it is done there
 // All other validations occur in the models, but they CAN be done here
@@ -54,27 +56,10 @@ module.exports.findAllUsers = (req, res) => {
 // Module.exports are the instruction that tells node.js which bit of code (functions, objects, strings, etc) to "export" from a given file so other files are allowed access to the export code.
 module.exports.findOneUser = (req, res) => { //basically we are exporting this function named findOneUser
 
+    console.log(`getting id ${req.params._id}`)
+
     User.findOne({email: req.params.id}) //since we are finding it by id we include it here // id can go through params because it is a path parameter in our routes 
-    .then(user => {
-        if(user == null){ // == means equal to, what we are doing here is checking if there is any email in the db that matches what comes through req.body
-            res.status(400).json({message: "There is no email matching the one you entered, please try again"})
-            res.cookie()
-        } else{ //no need to add comparison since the if failed
-            bcrypt.compare(req.body.password, user.password)
-                .then(isValid => {
-                    if(isValid === true){
-                        res.json({ msg: "Success, you logged in"});
-                    }
-                    else{
-                        console.log("Blah I hit the else statement")
-                        res.status(400).json({message: "Invalid login attempt"})
-                    }
-                })
-                .catch(err  => {
-                    console.log(err)
-                    res.status(400).json({message: "Invalid login attempt"})})
-        }
-    })
+        .then(oneUser => res.json({message: "Success, you found one user", user: oneUser}))
         .catch(err => res.json({message: "Hey, something went wrong", error: err}))
 }
 
