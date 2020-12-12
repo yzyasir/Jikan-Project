@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import axios from "axios";
+import Navbar from "../components/Navbar";
 
 const Main = (props) => {
 
@@ -15,8 +16,8 @@ const Main = (props) => {
 
     return(
         <div>
+            <Navbar />
             <button onClick={onClickHandler}>CLick me!</button>
-
         <ol>
     {
         pokemon.map((pokem, i) => {
