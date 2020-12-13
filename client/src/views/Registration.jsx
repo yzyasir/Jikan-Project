@@ -45,6 +45,7 @@ const Registration = (props) => {
 
     return(
         <div>
+            <Navbar />
             <h2>Register to use Jikan</h2>
             {/* Need to pass onChangeHandler into form to use it */}
             <Form onSubmitHandler={onSubmitHandler} form={form} onChangeHandler={onChangeHandler} error={error} />

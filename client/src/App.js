@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 import Registration from "./views/Registration";
 import Main from "./views/Main";
-import Navbar from './components/Navbar';
+
 
 
 
