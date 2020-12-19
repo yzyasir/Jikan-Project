@@ -32,3 +32,43 @@
     color: #555;
      /* this moves the icon to the right 18 px so that it fits inside the search bar */
 }
+
+/* Results Container */
+.results-container {
+    display: flex;
+    flex-flow: wrap
+}
+
+.results-item {
+    position: relative;
+    padding: 16px;
+    border: 1px solid #898989;
+    margin: 16px;
+    text-align: center;
+    min-width: 200px;
+    box-shadow: 2px 2px 2px #898989;
+}
+
+.image-username{
+    color: #ff7f50;
+    font-size: 18px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 0;
+    background-color: rgba(0, 0, 0, 0.8); /* 0.8 is for the opacity*/ 
+    padding: 5px 10px;
+}
+
+.image {
+    width: 100%;
+    height: 150px;
+}
+
+.image-wrapper {
+    display: flex;
+    align-self: center;
+    box-sizing: border-box;
+    height: 100%;
+    justify-content: center;
+}

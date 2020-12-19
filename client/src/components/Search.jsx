@@ -51,10 +51,14 @@ class Search extends React.Component {
     handleOnInputChange = (event) => {
         const query = event.target.value; //we are storing the query we type in into a const called query, then the query will be available inside event.target.value 
         // console.warn(query);   //if you want to make sure, that something only happens after you have certain information set in a state (below) you can do a callback function
-        this.setState( {query: query, loading: true, message: ''} , () => { //HERE IT GOES WRONG it = needed to be an anonymous function not stated as a callback, query : query is the property() name and property value
-        this.fetchSearchResults(1, query)}  //we do this here because setState is asynchronous, so for this reason, we use a callback, which only works after all of the prior info is set in state
-        ); //message is empty so if there was any message set prior it can be used
-        //loading is true so we can show the loader (necessary for when we call the api)
+        if ( ! query ) { //if query is empty, then pass in an empty results array and it will be shown as empty when search bar is also empty
+            this.setState( {query, results: {}, message: ''}) 
+        } else {
+            this.setState( {query: query, loading: true, message: ''} , () => { //HERE IT GOES WRONG it = needed to be an anonymous function not stated as a callback, query : query is the property() name and property value
+                this.fetchSearchResults(1, query)}  //we do this here because setState is asynchronous, so for this reason, we use a callback, which only works after all of the prior info is set in state
+                ); //message is empty so if there was any message set prior it can be used
+                //loading is true so we can show the loader (necessary for when we call the api)
+        }
     };
 
     renderSearchResults = () => {
@@ -65,7 +69,7 @@ class Search extends React.Component {
                     {results.map( resultsItem => {
                         return( //key needs to be unique, so we use the id to make it unique
                             <a key={resultsItem.id} href={resultsItem.previewURL} className="results-item"> 
-                                <h6 className="image-username">{resultsItem.username}</h6>
+                                <h6 className="image-username">{resultsItem.user}</h6>
                                 <div className="image-wrapper">
                                     <img src={resultsItem.previewURL} alt={`${resultsItem.username} image`} className="image"/> 
                                 </div>
@@ -79,7 +83,7 @@ class Search extends React.Component {
     }
 
     render() {
-        const {query} = this.state; //we are pulling query from here using object destructuring (pulling query out of state and placing it inside this constant) this is es6
+        const {query, message} = this.state; //we are pulling query from here using object destructuring (pulling query out of state and placing it inside this constant) this is es6
         // console.warn(this.state); //whatever the user types, is appended to the query
         return(
             <div className="container">
@@ -88,13 +92,16 @@ class Search extends React.Component {
                     <input
                         type="text"
                         name="query" //CHECK WHAT THIS DOES AGAIN
-                        value={query} //later we will put in the states query into here
+                        value={ query } //later we will put in the states query into here
                         id="search-input" //this is the same as we put in for htmlFor
                         placeholder="Search!" //this is what goes inside 
                         onChange={this.handleOnInputChange} //WHY USE .THIS HERE
                     />
-                </label> 
-                <i className="fas fa-search search-icon" aria-hidden="true"></i> {/* must use className instead of class, this i tag is import from font awesome for the seacrh icon, basically just for html */}
+                     <i className="fas fa-search search-icon" aria-hidden="true"></i> 
+                </label> {/* must use className instead of class, this i tag is import from font awesome for the seacrh icon, basically just for html */}
+
+                {/* Error Message */} {/* we had to pull message out of the state above, aka including it in the const*/}
+                {message && <p className="message"> { message }</p>} {/* purpose for the && is that is message is true, then whatever is right of && is displayed*/}
 
                 {/* Results Below */}
                 {this.renderSearchResults()}
