@@ -33,9 +33,22 @@ const CreateReview = (props) => {
             .catch(console.log("something went wrong"))
     }
 
+    useEffect(() => {
+        axios.get(`https://pixabay.com/api/?key=19524930-615e099e88fa1398dd638fdb1/${props._id}`) //need to pull the id through props
+        .then(res => {
+            console.log(res)
+        }, [])
+        .catch("there was an error in the pic api call")
+    })
+
     return(
         <div>
             <Navbar />
+            <div>
+                <a href>
+
+                </a>
+            </div>
             <h2>Comment On This Picture</h2>
             <ReviewForm reviewForm={reviewForm} onChangeHandler={onChangeHandler} error={error} />
         </div>

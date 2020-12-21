@@ -18,7 +18,7 @@ class Search extends React.Component {
 
     fetchSearchResults = (updatedPageNumber = '', query) => { //initially the number will be 1 but when we intruduce pagenation, it will update page numbers, and it will also take the query we typed in inside the query
         const pageNumber = updatedPageNumber ? `&page=${updatedPageNumber}` : '' //says, if we have any value, lets set the page number dynamically
-        const searchUrl = `https://pixabay.com/api/?key=19524930-615e099e88fa1398dd638fdb1&q=${query}${pageNumber}` //in backtick because we need to put in information dynamically
+        const searchUrl = `https://pixabay.com/api/?key=19524930-615e099e88fa1398dd638fdb1&q=${query}` //in backtick because we need to put in information dynamically
         console.log("before the if")
         // cancel token is necessary because you are making a request every time you type, this is making too many calls, so we do the code below to only search after we are done typing
         if (this.cancel ){ //checks if this.cancel has any value 

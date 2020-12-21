@@ -10,12 +10,12 @@ const ReviewForm = (props) => {
                 <div className="form-group">
                         <label>Write a Review</label>
                         {/* reviewForm is the state in the createReview page, not the setState */}
-                        <input type="text" name="review" className="form-control" onChange={props.onChangeHandler} value={props.reviewForm.review}></input> 
-                        { //we are passing our errors through props
+                        <input type="text" name="review" className="form-control" onChange={props.onChangeHandler} value={props.review}></input> 
+                        {/* { //we are passing our errors through props
                             props.error.review ?
                         <span>{props.error.review.message}</span>
                         : ""
-                        } 
+                        }  */}
                 </div>
                 <input type="submit" value="Submit" className="btn btn-primary"></input>
                 </form>
