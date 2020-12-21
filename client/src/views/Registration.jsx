@@ -20,7 +20,7 @@ const Registration = (props) => {
         eventProp.preventDefault(); //preventDefault is called on the event when submitting the form to prevent a browser reload/refresh. Try the code without it to see what happens.
         setForm({
             ...form,
-            [eventProp.target.firstName]: eventProp.target.value 
+            [eventProp.target.firstName]: eventProp.target.value //is this meant to be firstName
             //this needs to be eventProp.target.name so that the component in the form updates
             //.target.value retrieves the value of whatever input it was called on, so whatever I insert in input can be accessed through event.target.value
         })

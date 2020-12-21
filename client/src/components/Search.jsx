@@ -10,7 +10,6 @@ class Search extends React.Component {
         this.state = { //we are now able to usr this after the super
             query: '', //we will store the query info here
             results: {}, //we need this to store the results that we recieve from the api
-            loading: false, //we want to show loading while the query is being fetched
             message: '' //want to show the message if there is an error or if there is no data available
         }
         this.cancel = ''; //you cancel a request using a cancel token. This is an axios api based cancel token. Cancels the previous request. 
@@ -35,7 +34,6 @@ class Search extends React.Component {
             this.setState({
                 results: res.data.hits, //what you looked for
                 message: resultNotFoundMessage, //its the same message above
-                loading: false //You have recieved your query, no more need for loader
             })}) //this is the info we want to show the user in case the result was not found
         .catch(err => {
             if(axios.isCancel(err) || err) { //if there is an error from axios in canceling a request, or if there is any other error (|| this means if there is any other error)
@@ -67,14 +65,14 @@ class Search extends React.Component {
             return(
                 <div className = "results-container">
                     {results.map( resultsItem => {
-                        return( //key needs to be unique, so we use the id to make it unique
+                        return( //key needs to be unique, so we use the id to make it unique, now we can put this function into a render function (this is for cleanliness, not to make our render below too long)
+                        <div className="image-wrapper">
                             <a key={resultsItem.id} href={resultsItem.previewURL} className="results-item"> 
-                                <h6 className="image-username">{resultsItem.user}</h6>
-                                <div className="image-wrapper">
-                                    <img src={resultsItem.previewURL} alt={`${resultsItem.username} image`} className="image"/> 
-                                </div>
-                            </a> //now we can put this function into a render function (this is for cleanliness, not to make our render below too long)
-                        )
+                                <img src={resultsItem.previewURL} alt={`${resultsItem.username} image`} className="image"/> 
+                            </a>
+                            <a href={`http://localhost:3000/comment/page/${resultsItem.id}`}>Comment</a>
+                        </div> 
+                        ) 
                     })}
 
                 </div>
